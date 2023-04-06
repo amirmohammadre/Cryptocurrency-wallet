@@ -1,5 +1,7 @@
-#importing libraries
+# ------ importing libraries
+
 from validate_email import validate_email
+import subprocess
 import rsa
 import time
 import sqlite3
@@ -86,6 +88,8 @@ else:
                 continue
 
 
+    # ------ process login to system
+
     elif req == 'login':
         
         while True:
@@ -116,6 +120,17 @@ else:
                     print(line.strip())
                 
                 pub_uname.close()   
+
+                
+                # ------ Transfer public key to remote server
+        
+                h_name          = input("Enter the IP address of the remote server: ")
+                server_username = input("username of the remote server: ")
+                path_desired    = input("path desired for transfer file to remote server: ")
+
+                p = subprocess.Popen(["scp", "public-{}.pem".format(uname), "{su}@{hn}:{pd}"
+                                    .format(su = server_username, hn = h_name, pd = path_desired ) ])
+                sts = os.waitpid(p.pid, 0)
 
 
                 exit()
