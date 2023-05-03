@@ -8,9 +8,6 @@
 ![image](./img/cryptocurrency_wallet.png)
 
 
-## Intro:
-
-
 ---
 
 ## Project explanation:
